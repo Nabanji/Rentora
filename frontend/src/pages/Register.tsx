@@ -65,6 +65,18 @@ const Register: React.FC = () => {
     })
   };
 
+  // const handleGoogleSignIn = async () => {
+  //   const { data, error } = await supabase.auth.signInWithOAuth({
+  //     provider: "google",
+  //   })
+
+  //   if (error) {
+  //     setError(error.message);
+  //   } else {
+  //     console.log("Redirecting to Google Sign-in", data.url);
+  //   }
+  // }
+
   return (
     <div className="login-container w-full h-screen flex justify-center items-center border border-black p-2">
       <div className="w-100 text-center border border-gray-200 p-6 rounded-3xl shadow-lg">
@@ -166,7 +178,10 @@ const Register: React.FC = () => {
             <hr className="grow border-t border-gray-300" />
           </div>
 
-          <div className="w-full border border-gray-300 rounded-lg p-2 cursor-pointer hover:shadow-md transition-all flex justify-center items-center">
+          <div 
+            className="w-full border border-gray-300 rounded-lg p-2 cursor-pointer hover:shadow-md transition-all flex justify-center items-center"
+            // onClick={handleGoogleSignIn}
+          >
             <div className="link-container">
               <FcGoogle size={24}/> 
             </div>
