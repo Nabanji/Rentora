@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const ForgotPassword: React.FC = () => {
   return (
     <div className="w-full h-screen flex justify-center items-center border border-black p-2">
-        <div className="w-100 text-center border border-gray-200 p-6 rounded-3xl shadow-lg">
-            <h2 className="text-2xl font-semibold mb-2">Forgot Password</h2>
+        <div className="w-100 text-left border border-gray-200 p-6 rounded-3xl shadow-lg">
+            <h2 className="text-2xl font-semibold mb-2 text-center">Forgot Password</h2>
             <p className="text-sm text-gray-600 mb-6">
                 Enter your email address and we’ll send you instructions to reset your password.
             </p>
@@ -18,7 +18,7 @@ const ForgotPassword: React.FC = () => {
                         name="email"
                         autoComplete="email"
                         placeholder="you@example.com"
-                        className="w-full border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="w-full p-2 text-sm border border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700"
                         required
                     />
                 </div>
