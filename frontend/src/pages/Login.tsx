@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { FcGoogle } from "react-icons/fc";
 
-const Login = () => {
+const Login: React.FC = () => {
   return (
     <div className="login-container w-full h-screen flex justify-center items-center border border-black p-2">
       <div className="w-100 text-center border border-gray-200 p-6 rounded-3xl shadow-lg">
@@ -16,10 +16,13 @@ const Login = () => {
               Email:
             </label>
             <input 
+              id="email"
               type="email"
               name="email" 
-              placeholder="Enter your email"
+              placeholder="you@example.com"
+              autoComplete="email"
               className="w-full p-2 text-sm border border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700"
+              required
             />
           </div>
 
@@ -31,15 +34,17 @@ const Login = () => {
               Password:
             </label>
             <input 
+              id="password"
               type="password"
               name="password" 
               placeholder="Enter your password"
               className="w-full p-2 border text-sm border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700"
+              required
             />
           </div>
 
           <div className="w-full items-end text-right m-2">
-            <p className="text-sm mr-2"> <Link to="#" className="text-blue-500">Forgot password?</Link></p>
+            <p className="text-sm mr-2"> <Link to="/forgot-password" className="text-blue-500 hover:underline">Forgot password?</Link></p>
           </div>
 
           <div className="my-3">
@@ -65,7 +70,7 @@ const Login = () => {
 
           <div>
             <p className="text-sm mt-4">
-              Don't have an account? <Link to="/register" className="text-blue-500">Register</Link>
+              Don't have an account? <Link to="/register" className="text-blue-500 hover:underline">Register</Link>
             </p>
           </div>
 

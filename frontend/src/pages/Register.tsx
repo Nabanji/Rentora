@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { FcGoogle } from "react-icons/fc";
 
-const Register = () => {
+const Register: React.FC = () => {
   return (
     <div className="login-container w-full h-screen flex justify-center items-center border border-black p-2">
       <div className="w-100 text-center border border-gray-200 p-6 rounded-3xl shadow-lg">
@@ -16,10 +16,12 @@ const Register = () => {
               Full Name
             </label>
             <input 
+              id="name"
               type="text" 
               name="name"
               placeholder="Enter your full name"
               className="w-full p-2 text-sm border border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700"
+              required
             />
           </div>
 
@@ -31,10 +33,13 @@ const Register = () => {
               Email:
             </label>
             <input 
+              id="email"
               type="email"
               name="email" 
-              placeholder="Enter your email"
+              autoComplete="email"
+              placeholder="you@example.com"
               className="w-full p-2 text-sm border border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700"
+              required
             />
           </div>
 
@@ -46,10 +51,12 @@ const Register = () => {
               Password:
             </label>
             <input 
+              id="password"
               type="password"
               name="password" 
               placeholder="Enter your password"
               className="w-full p-2 border text-sm border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700"
+              required
             />
           </div>
 
@@ -61,10 +68,12 @@ const Register = () => {
               Confirm Password:
             </label>
             <input 
+              id="confirmPassword"
               type="password" 
               name="confirmPassword" 
               placeholder="Confirm your password" 
               className="w-full p-2 border text-sm border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700" 
+              required
             />
           </div>
 
@@ -91,7 +100,7 @@ const Register = () => {
 
           <div>
             <p className="text-sm mt-4">
-              Already have an account? <Link to="/" className="text-blue-500">Login</Link>
+              Already have an account? <Link to="/" className="text-blue-500 hover:underline">Login</Link>
             </p>
           </div>
 

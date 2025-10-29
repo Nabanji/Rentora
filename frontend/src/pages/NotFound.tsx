@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AlertCircle } from "lucide-react";
 
-const NotFound = () => {
+const NotFound: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen text-center bg-gray-50 px-6">
       <AlertCircle className="w-16 h-16 text-red-500 mb-4" />
