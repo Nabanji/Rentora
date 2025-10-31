@@ -44,7 +44,6 @@ const Login: React.FC = () => {
       setError(error.message);
       console.error("Login error:", error);
     } else {
-      console.log("User logged in:", data);
       navigate("/dashboard");
     }
   }
