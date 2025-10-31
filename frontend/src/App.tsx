@@ -1,14 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 import NotFound from './pages/NotFound';
-import ForgotPassword from './pages/ForgotPassword';
+import ForgotPassword from './pages/auth/ForgotPassword';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
-import Transactions from './pages/Transactions';
-import Tenants from './pages/Tenants';
-import Revenue from './pages/Revenue';
-import Settings from './pages/Settings';
+import Transactions from './pages/content/Transactions';
+import Tenants from './pages/content/Tenants';
+import Revenue from './pages/content/Revenue';
+import Settings from './pages/content/Settings';
+import Properties from './pages/content/Properties';
 
 function App() {
 
@@ -22,6 +23,14 @@ function App() {
         element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/properties"
+        element={
+          <ProtectedRoute>
+            <Properties />
           </ProtectedRoute>
         }
       />

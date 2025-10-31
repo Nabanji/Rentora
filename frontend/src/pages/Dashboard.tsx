@@ -1,9 +1,9 @@
 import Navbar from "../components/Navbar";
-import DashboardContent from "./DashboardContent";
+import DashboardContent from "./content/DashboardContent";
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="flex gap-3">
+    <div className="flex">
         <Navbar />
         <DashboardContent />
     </div>

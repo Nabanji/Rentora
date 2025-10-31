@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
 import { FcGoogle } from "react-icons/fc";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 import React, { useState } from "react";
 
 interface FormData {

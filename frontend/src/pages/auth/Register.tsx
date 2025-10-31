@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom"
 import { FcGoogle } from "react-icons/fc";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 
 
 type FormData = {
