@@ -5,6 +5,10 @@ import NotFound from './pages/NotFound';
 import ForgotPassword from './pages/ForgotPassword';
 import Dashboard from './pages/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import Transactions from './pages/Transactions';
+import Tenants from './pages/Tenants';
+import Revenue from './pages/Revenue';
+import Settings from './pages/Settings';
 
 function App() {
 
@@ -21,6 +25,40 @@ function App() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/transactions"
+        element={
+          <ProtectedRoute>
+            <Transactions />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/tenants"
+        element={
+          <ProtectedRoute>
+            <Tenants />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/revenue"
+        element={
+          <ProtectedRoute>
+            <Revenue />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route 
+        path='/settings'
+        element={
+          <ProtectedRoute>
+            <Settings />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
