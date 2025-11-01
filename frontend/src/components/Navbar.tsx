@@ -4,7 +4,7 @@ import {
   BarChart3,
   Building,
   ReceiptText,
-  Settings,
+  // Settings,
   Users,
   LogOut,
 } from "lucide-react";
