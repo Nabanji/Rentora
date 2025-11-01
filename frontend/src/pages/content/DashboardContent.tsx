@@ -1,7 +1,7 @@
 import StatCard from "../../components/cards/StatCard";
 import RevenueChart from "../../components/charts/RevenueChart";
 import RevenueBreakdown from "../../components/charts/RevenueBreakdown";
-import TopPerformingProperties from "../../components/charts/TopPerformingProperties";
+// import TopPerformingProperties from "../../components/charts/TopPerformingProperties";
 import PropertyInsights from "../../components/charts/PropertyInsights";
 import { Home, Users, DollarSign, Building2 } from "lucide-react";
 
@@ -73,11 +73,12 @@ const DashboardContent: React.FC = () => {
         </div>
 
         {/* Insights section */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* <div className="grid grid-cols-1 lg:grid-cols-3 gap-4"> */}
+        <div>
           <div className="lg:col-span-2">
             <PropertyInsights />
           </div>
-          <TopPerformingProperties />
+          {/* <TopPerformingProperties /> */}
         </div>
 
       </div>
