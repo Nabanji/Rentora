@@ -8,7 +8,6 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Transactions from './pages/content/Transactions';
 import Tenants from './pages/content/Tenants';
 import Revenue from './pages/content/Revenue';
-import Settings from './pages/content/Settings';
 import Properties from './pages/content/Properties';
 
 function App() {
@@ -55,15 +54,6 @@ function App() {
         element={
           <ProtectedRoute>
             <Revenue />
-          </ProtectedRoute>
-        }
-      />
-
-      <Route 
-        path='/settings'
-        element={
-          <ProtectedRoute>
-            <Settings />
           </ProtectedRoute>
         }
       />

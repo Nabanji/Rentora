@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
     { Icon: BarChart3, title: "Revenue", path: "/revenue" },
     { Icon: Users, title: "Tenants", path: "/tenants" },
     { Icon: ReceiptText, title: "Transactions", path: "/transactions" },
-    { Icon: Settings, title: "Settings", path: "/settings" },
+    // { Icon: Settings, title: "Settings", path: "/settings" },
   ];
 
   return (
