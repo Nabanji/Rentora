@@ -1,8 +1,9 @@
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar";
-import { Users, Home, DollarSign, Mail } from "lucide-react";
+import { Users, Home, DollarSign, Plus, X, Check } from "lucide-react";
 
 const Tenants: React.FC = () => {
-  const tenants = [
+  const [tenants, setTenants] = useState([
     {
       id: 1,
       name: "James Kariuki",
@@ -43,7 +44,53 @@ const Tenants: React.FC = () => {
       email: "faith.njeri@email.com",
       phone: "+254 722 345 678",
     },
-  ];
+  ]);
+
+  const [showModal, setShowModal] = useState(false);
+  const [newTenant, setNewTenant] = useState({
+    name: "",
+    property: "",
+    unit: "",
+    rent: "",
+    status: "Pending",
+    email: "",
+    phone: "",
+  });
+
+  // Handle input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewTenant({ ...newTenant, [e.target.name]: e.target.value });
+  };
+
+  // Handle add tenant
+  const handleAddTenant = (e: React.FormEvent) => {
+    e.preventDefault();
+    const formattedRent = `$${parseFloat(newTenant.rent).toLocaleString()}`;
+    const newEntry = {
+      id: tenants.length + 1,
+      ...newTenant,
+      rent: formattedRent,
+    };
+    setTenants([...tenants, newEntry]);
+    setShowModal(false);
+    setNewTenant({
+      name: "",
+      property: "",
+      unit: "",
+      rent: "",
+      status: "Pending",
+      email: "",
+      phone: "",
+    });
+  };
+
+  // ✅ Handle mark as paid
+  const handleMarkAsPaid = (id: number) => {
+    const updatedTenants = tenants.map((tenant) =>
+      tenant.id === id ? { ...tenant, status: "Paid" } : tenant
+    );
+    setTenants(updatedTenants);
+  };
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -57,9 +104,12 @@ const Tenants: React.FC = () => {
           <h1 className="text-3xl font-bold tracking-tight text-white">
             Tenants
           </h1>
-          <button className="flex items-center gap-2 bg-linear-to-r from-indigo-600 to-purple-700 hover:from-indigo-500 hover:to-purple-600 text-white font-medium px-5 py-2.5 rounded-xl shadow-lg transition-all duration-300">
-            <Mail size={18} />
-            Contact Tenants
+          <button
+            onClick={() => setShowModal(true)}
+            className="flex items-center gap-2 bg-linear-to-r from-indigo-600 to-purple-700 hover:from-indigo-500 hover:to-purple-600 text-white cursor-pointer font-medium px-5 py-2.5 rounded-xl shadow-lg transition-all duration-300"
+          >
+            <Plus size={18} />
+            Add Tenant
           </button>
         </div>
 
@@ -73,7 +123,7 @@ const Tenants: React.FC = () => {
                 <h3 className="text-sm text-gray-400">Total Tenants</h3>
                 <Users className="text-cyan-400" size={18} />
               </div>
-              <p className="text-2xl font-bold text-white">300</p>
+              <p className="text-2xl font-bold text-white">{tenants.length}</p>
               <p className="text-xs text-cyan-500 mt-1">+12 new this month</p>
             </div>
 
@@ -130,26 +180,150 @@ const Tenants: React.FC = () => {
                       </div>
                     </td>
                     <td className="text-right">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-medium ${
-                          t.status === "Paid"
-                            ? "bg-emerald-500/20 text-emerald-400"
-                            : t.status === "Pending"
-                            ? "bg-amber-500/20 text-amber-400"
-                            : "bg-red-500/20 text-red-400"
-                        }`}
-                      >
-                        {t.status}
-                      </span>
+                      <div className="flex justify-end items-center gap-2">
+                        <span
+                          className={`px-3 py-1 rounded-full text-xs font-medium ${
+                            t.status === "Paid"
+                              ? "bg-emerald-500/20 text-emerald-400"
+                              : t.status === "Pending"
+                              ? "bg-amber-500/20 text-amber-400"
+                              : "bg-red-500/20 text-red-400"
+                          }`}
+                        >
+                          {t.status}
+                        </span>
+                        {t.status !== "Paid" && (
+                          <button
+                            onClick={() => handleMarkAsPaid(t.id)}
+                            className="flex items-center gap-1 text-xs bg-emerald-600 hover:bg-emerald-500 text-white px-2 py-1 rounded-md transition cursor-pointer"
+                          >
+                            <Check size={14} />
+                            Mark as Paid
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-
         </div>
       </div>
+
+      {/* Add Tenant Modal */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+          <div className="bg-slate-900 rounded-2xl p-6 w-full max-w-lg border border-slate-700 shadow-2xl relative">
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white"
+            >
+              <X size={20} />
+            </button>
+
+            <h2 className="text-xl font-semibold text-white mb-4">Add New Tenant</h2>
+
+            <form onSubmit={handleAddTenant} className="space-y-4">
+              <div>
+                <label className="block text-sm text-gray-400 mb-1">Full Name</label>
+                <input
+                  name="name"
+                  value={newTenant.name}
+                  onChange={handleChange}
+                  type="text"
+                  required
+                  placeholder="e.g., James Kariuki"
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm text-gray-400 mb-1">Property</label>
+                <input
+                  name="property"
+                  value={newTenant.property}
+                  onChange={handleChange}
+                  type="text"
+                  required
+                  placeholder="e.g., Sunset Apartments"
+                  className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">Unit</label>
+                  <input
+                    name="unit"
+                    value={newTenant.unit}
+                    onChange={handleChange}
+                    type="text"
+                    required
+                    placeholder="e.g., A-203"
+                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">Rent ($)</label>
+                  <input
+                    name="rent"
+                    value={newTenant.rent}
+                    onChange={handleChange}
+                    type="number"
+                    required
+                    placeholder="e.g., 1200"
+                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">Email</label>
+                  <input
+                    name="email"
+                    value={newTenant.email}
+                    onChange={handleChange}
+                    type="email"
+                    required
+                    placeholder="e.g., james.kariuki@email.com"
+                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm text-gray-400 mb-1">Phone</label>
+                  <input
+                    name="phone"
+                    value={newTenant.phone}
+                    onChange={handleChange}
+                    type="text"
+                    required
+                    placeholder="e.g., +254 712 456 890"
+                    className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end mt-6">
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="px-4 py-2 rounded-lg text-sm bg-slate-700 text-gray-300 hover:bg-slate-600 mr-2"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 rounded-lg text-sm bg-indigo-600 hover:bg-indigo-500 text-white"
+                >
+                  Save Tenant
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
