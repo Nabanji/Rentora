@@ -78,10 +78,10 @@ const Navbar: React.FC = () => {
       </div>
 
       {/* Footer */}
-      <div className="px-5 pb-8 border-t border-slate-700/50 bg-slate-900/60 backdrop-blur-sm">
+      <div className="pb-8 border-t border-slate-700/50 bg-slate-900/60 backdrop-blur-sm">
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-red-300 hover:bg-red-600/20 hover:text-white transition-all duration-300"
+          className="w-full flex items-center gap-3 px-4 py-3 text-red-300 hover:bg-red-600/20 hover:text-white transition-all duration-300 cursor-pointer"
         >
           <LogOut size={20} />
           <span className="font-medium">Logout</span>

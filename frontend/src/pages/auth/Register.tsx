@@ -1,23 +1,22 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { supabase } from "../../supabaseClient";
-
+import { motion } from "framer-motion";
 
 type FormData = {
   name: string;
   email: string;
   password: string;
   confirmPassword: string;
-}
+};
 
 const Register: React.FC = () => {
-
-  const [ formData, setFormData ] = useState<FormData>({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -25,7 +24,7 @@ const Register: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,8 +42,8 @@ const Register: React.FC = () => {
       email: formData.email,
       password: formData.password,
       options: {
-        data: { full_name: formData.name }
-      }
+        data: { full_name: formData.name },
+      },
     });
 
     setLoading(false);
@@ -58,146 +57,153 @@ const Register: React.FC = () => {
     }
 
     setFormData({
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    })
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    });
   };
 
-  // const handleGoogleSignIn = async () => {
-  //   const { data, error } = await supabase.auth.signInWithOAuth({
-  //     provider: "google",
-  //   })
-
-  //   if (error) {
-  //     setError(error.message);
-  //   } else {
-  //     console.log("Redirecting to Google Sign-in", data.url);
-  //   }
-  // }
-
   return (
-    <div className="login-container w-full h-screen flex justify-center items-center border border-black p-2">
-      <div className="w-100 text-center border border-gray-200 p-6 rounded-3xl shadow-lg">
-        <h1 className="text-2xl font-bold mb-4">Register</h1>
-        <form className="w-full" onSubmit={handleSubmit}>
+    <div className="w-full h-screen bg-linear-to-br from-slate-950 via-slate-900 to-slate-800 flex items-center justify-center px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="w-full max-w-md bg-slate-900/70 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-[0_0_30px_rgba(99,102,241,0.2)] p-8 text-gray-100"
+      >
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="mx-auto w-12 h-12 rounded-2xl bg-linear-to-br from-indigo-500 via-blue-600 to-purple-700 flex items-center justify-center text-white font-extrabold text-lg shadow-md">
+            R
+          </div>
+          <h1 className="text-2xl font-bold mt-4 tracking-tight text-white">
+            Create Account
+          </h1>
+          <p className="text-gray-400 text-sm">
+            Join Rentora and start managing your properties today
+          </p>
+        </div>
 
-          {error && <div className="w-full bg-red-100 text-red-700 p-2 mb-4 rounded-md">{error}</div>}
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {error && (
+            <div className="w-full bg-red-500/10 border border-red-500/40 text-red-400 text-sm p-3 rounded-lg text-center">
+              {error}
+            </div>
+          )}
 
-          <div className="w-full flex flex-col items-start">
-            <label 
-              htmlFor="name"
-              className="text-base"
-            >
+          {/* Name */}
+          <div>
+            <label htmlFor="name" className="block text-sm text-gray-300 mb-1">
               Full Name
             </label>
-            <input 
+            <input
               id="name"
-              type="text" 
+              type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Enter your full name"
-              className="w-full p-2 text-sm border border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700"
+              placeholder="John Doe"
               required
+              className="w-full bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200"
             />
           </div>
 
-          <div className="w-full flex flex-col items-start">
-            <label 
-              htmlFor="email"
-              className="text-base"
-            >
-              Email:
+          {/* Email */}
+          <div>
+            <label htmlFor="email" className="block text-sm text-gray-300 mb-1">
+              Email Address
             </label>
-            <input 
+            <input
               id="email"
               type="email"
-              name="email" 
+              name="email"
               value={formData.email}
               onChange={handleChange}
-              autoComplete="email"
               placeholder="you@example.com"
-              className="w-full p-2 text-sm border border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700"
+              autoComplete="email"
               required
+              className="w-full bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200"
             />
           </div>
 
-          <div className="w-full flex flex-col items-start mt-1">
-            <label 
-              htmlFor="password"
-              className="text-base"
-            >
-              Password:
+          {/* Password */}
+          <div>
+            <label htmlFor="password" className="block text-sm text-gray-300 mb-1">
+              Password
             </label>
-            <input 
+            <input
               id="password"
               type="password"
-              name="password" 
+              name="password"
               value={formData.password}
               onChange={handleChange}
-              placeholder="Enter your password"
-              className="w-full p-2 border text-sm border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700"
+              placeholder="Enter password"
               required
+              className="w-full bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200"
             />
           </div>
 
-          <div className="w-full flex flex-col items-start mt-1">
-            <label 
+          {/* Confirm Password */}
+          <div>
+            <label
               htmlFor="confirmPassword"
-              className="text-base"
+              className="block text-sm text-gray-300 mb-1"
             >
-              Confirm Password:
+              Confirm Password
             </label>
-            <input 
+            <input
               id="confirmPassword"
-              type="password" 
-              name="confirmPassword" 
+              type="password"
+              name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              placeholder="Confirm your password" 
-              className="w-full p-2 border text-sm border-gray-400 rounded-md mt-1 focus:outline-none focus:border-blue-700" 
+              placeholder="Re-enter password"
               required
+              className="w-full bg-slate-800/60 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-all duration-200"
             />
           </div>
 
-          <div className="my-4">
-            <button 
-              type="submit"
-              disabled={loading}
-              className="w-full bg-blue-500 text-white text-sm p-2 rounded-lg cursor-pointer hover:bg-blue-600 transition-all"
-            >
-              {loading ? "Registering..." : "Register"}
-            </button>
-          </div>
-
-          <div className="flex items-center my-4">
-            <hr className="grow border-t border-gray-300" />
-            <span className="mx-2 text-gray-500 text-sm">or</span>
-            <hr className="grow border-t border-gray-300" />
-          </div>
-
-          <div 
-            className="w-full border border-gray-300 rounded-lg p-2 cursor-pointer hover:shadow-md transition-all flex justify-center items-center"
-            // onClick={handleGoogleSignIn}
+          {/* Submit */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-linear-to-r from-indigo-600 to-purple-700 hover:from-indigo-500 hover:to-purple-600 text-white font-medium py-2.5 rounded-xl shadow-lg transition-all duration-300 disabled:opacity-60"
           >
-            <div className="link-container">
-              <FcGoogle size={24}/> 
-            </div>
+            {loading ? "Registering..." : "Register"}
+          </button>
+
+          {/* Divider */}
+          <div className="flex items-center my-4">
+            <hr className="grow border-t border-slate-700" />
+            <span className="mx-2 text-gray-500 text-sm">or</span>
+            <hr className="grow border-t border-slate-700" />
           </div>
 
-          <div>
-            <p className="text-sm mt-4">
-              Already have an account? <Link to="/" className="text-blue-500 hover:underline">Login</Link>
-            </p>
-          </div>
+          {/* Google */}
+          <button
+            type="button"
+            className="w-full border border-slate-700 bg-slate-800/60 hover:bg-slate-800/80 rounded-xl py-2.5 flex items-center justify-center gap-2 text-gray-200 transition-all duration-300 shadow-md"
+          >
+            <FcGoogle size={22} />
+            <span className="text-sm font-medium">Sign up with Google</span>
+          </button>
 
-
+          {/* Login link */}
+          <p className="text-sm text-center text-gray-400 mt-4">
+            Already have an account?{" "}
+            <Link
+              to="/"
+              className="text-indigo-400 hover:text-indigo-300 transition"
+            >
+              Login
+            </Link>
+          </p>
         </form>
-      </div>
+      </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
