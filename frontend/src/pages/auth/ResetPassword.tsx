@@ -42,6 +42,7 @@ const ResetPassword: React.FC = () => {
         try {
             const { data, error } = await supabase.auth.updateUser({
                 password: formData.password,
+                data
             });
 
             if (error) throw error;
